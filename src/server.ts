@@ -17,12 +17,18 @@ router.get('/rovers', async (req, res) => {
   const roverList : RoverI[] = await getRovers();
   res.send(roverList);
 });
-router.get('/rovers/:roverName/photos/:cameraType', async (req, res) => {
+router.get('/rovers/:roverName/photos/:cameraType/', async (req, res) => {
     const params = req.params;
-    const photos : PhotoI[] = await getPhotos(
+    var photos : PhotoI[] = await getPhotos(
         params.roverName, 
         cameraType[params.cameraType.toUpperCase() as keyof typeof cameraType]
         );
+    const paginationEnd = Number(req.query.paginationEnd);
+    const paginationStart = Number(req.query.paginationStart)-1;
+    if (!isNaN(paginationEnd)) {
+        photos = photos.slice(0,paginationEnd)
+    }
+    if (!isNaN(paginationStart)){photos = photos.slice(paginationStart)}
     res.send(photos);
 });
 
