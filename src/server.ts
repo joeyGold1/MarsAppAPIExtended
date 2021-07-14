@@ -16,9 +16,13 @@ router.get('/rovers', async (req, res) => {
   const roverList = await getRovers();
   res.send(roverList);
 });
-router.get('/rovers/photos', async (req, res) => {
-  const photos = await getPhotos('curiosity',cameraType.FHAZ);
-  res.send(photos);
+router.get('/rovers/:roverName/photos/:cameraType', async (req, res) => {
+    const params = req.params;
+    const photos = await getPhotos(
+        params.roverName, 
+        cameraType[params.cameraType.toUpperCase() as keyof typeof cameraType]
+        );
+    res.send(photos);
 });
 app.use('/', router);
 
