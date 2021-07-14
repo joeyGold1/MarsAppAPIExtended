@@ -24,6 +24,8 @@ router.get('/rovers/:roverName/photos/:cameraType', async (req, res) => {
         );
     res.send(photos);
 });
+
+
 app.use('/', router);
 
 app.listen(port, () => {
