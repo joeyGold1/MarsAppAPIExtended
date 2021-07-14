@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_KEY, roversURL } from "./constants";
 
-export function getRovers() {
-    const url = `https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=${process.env.API_KEY}`;
-    const roverList = axios.get(url);
+export async function getRovers() {
+    const url = `${roversURL}?api_key=${API_KEY}`;
+    const roverList = (await axios.get(url)).data;
     return roverList;
 }
