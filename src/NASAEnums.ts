@@ -1,4 +1,4 @@
-export enum cameraType {
+export enum CameraType {
     FHAZ        = "FHAZ",
     RHAZ        = "RHAZ",
     MAST        = "MAST",		
@@ -8,6 +8,7 @@ export enum cameraType {
     NAVCAM  	= "NAVCAM",
     PANCAM  	= "PANCAM",
     MINITES     = "MINITES",
+    ENTRY       = "ENTRY",
     EDL_RUCAM   = "EDL_RUCAM",
     EDL_DDCAM   = "EDL_DDCAM",
     EDL_PUCAM1  = "EDL_PUCAM1",

@@ -1,7 +1,6 @@
 import express from "express";
-import { getPhotos } from "./getPhotos";
+import { getPhotosHandleQuery } from "./getPhotosHandleQuery";
 import { getRovers } from "./getRovers";
-import { cameraType } from "./NASAEnums";
 import { PhotoI, RoverI } from "./nasaInterfaces";
 
 const app = express();
@@ -16,16 +15,10 @@ router.get("/rovers", async (req, res) => {
 });
 router.get('/rovers/:roverName/photos/:cameraType/', async (req, res) => {
     const params = req.params;
-    var photos : PhotoI[] = await getPhotos(
-        params.roverName, 
-        cameraType[params.cameraType.toUpperCase() as keyof typeof cameraType]
-        );
-    const paginationEnd = Number(req.query.paginationEnd);
-    const paginationStart = Number(req.query.paginationStart)-1;
-    if (!isNaN(paginationEnd)) {
-        photos = photos.slice(0,paginationEnd)
-    }
-    if (!isNaN(paginationStart)){photos = photos.slice(paginationStart)}
+    const roverName = params.roverName;
+    const cameraType = params.cameraType;
+    const query = req.query;
+    var photos: PhotoI[] = await getPhotosHandleQuery(query, roverName, cameraType);
     res.send(photos);
 });
 
