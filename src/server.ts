@@ -2,6 +2,7 @@ import express from "express";
 import { getPhotos } from "./getPhotos";
 import { getRovers } from "./getRovers";
 import { cameraType } from "./NASAEnums";
+import { PhotoI, RoverI } from "./nasaInterfaces";
 
 
 
@@ -13,12 +14,12 @@ app.use(express.json());
 const router = express.Router();
 router.get('/test', (req, res) => res.send('Hello world !'));
 router.get('/rovers', async (req, res) => {
-  const roverList = await getRovers();
+  const roverList : RoverI[] = await getRovers();
   res.send(roverList);
 });
 router.get('/rovers/:roverName/photos/:cameraType', async (req, res) => {
     const params = req.params;
-    const photos = await getPhotos(
+    const photos : PhotoI[] = await getPhotos(
         params.roverName, 
         cameraType[params.cameraType.toUpperCase() as keyof typeof cameraType]
         );
