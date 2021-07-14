@@ -4,6 +4,6 @@ import { RoverI } from "./nasaInterfaces";
 
 export async function getRovers() {
     const url = `${roversURL}?api_key=${API_KEY}`;
-    const roverList : RoverI[] = (await axios.get(url)).data.rovers;
+    const roverList: RoverI[] = (await axios.get(url)).data.rovers;
     return roverList;
 }
