@@ -17,7 +17,7 @@ export interface CameraI {
 export interface RoverBaseI {
     id: number;
     name: string;
-    landing_data: string;
+    landing_date: string;
     launch_date: string;
     status: string;
 }
