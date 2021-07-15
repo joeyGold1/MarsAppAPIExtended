@@ -1,8 +1,8 @@
 import { API_KEY, roversURL } from "./constants";
 import getFromApi from "./getFromApi";
-import { RoverI } from "./nasaInterfaces";
+import { RoverFullI } from "./nasaInterfaces";
 
 export async function getRovers() {
-    const url = `${roversURL}?api_key=${API_KEY}`;
-    return (await getFromApi<{rovers: RoverI[]}>(url)).rovers;
+  const url = `${roversURL}?api_key=${API_KEY}`;
+  return (await getFromApi<{ rovers: RoverFullI[] }>(url)).rovers;
 }
