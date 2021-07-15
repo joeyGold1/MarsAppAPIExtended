@@ -4,7 +4,7 @@ export interface PhotoI {
     camera: CameraI;
     img_src: string;
     earth_date: string;
-    rover: RoverI;
+    rover: RoverBaseI;
 }
 
 export interface CameraI {
@@ -14,10 +14,16 @@ export interface CameraI {
     full_name: string;
 }
 
-export interface RoverI {
+export interface RoverBaseI {
     id: number;
     name: string;
     landing_data: string;
     launch_date: string;
     status: string;
+}
+
+export interface RoverFullI extends RoverBaseI{
+    max_sol:number;
+    max_date:string;
+    cameras: CameraI;
 }

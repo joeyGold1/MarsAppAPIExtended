@@ -1,7 +1,7 @@
 import express from "express";
 import { getPhotosHandleQuery } from "./getPhotosHandleQuery";
 import { getRovers } from "./getRovers";
-import { PhotoI, RoverI } from "./nasaInterfaces";
+import { PhotoI, RoverBaseI } from "./nasaInterfaces";
 var cors = require('cors')
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.json());
 const router = express.Router();
 router.get("/test", (req, res) => res.send("Hello world !"));
 router.get("/rovers", async (req, res) => {
-    const roverList: RoverI[] = await getRovers();
+    const roverList: RoverBaseI[] = await getRovers();
     res.send(roverList);
 });
 router.get('/rovers/:roverName/photos/:cameraType/', async (req, res) => {
